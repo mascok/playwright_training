@@ -8,7 +8,7 @@ let SharedController: sharedController;
 test.describe('Accessibility Test', () => {
     test.beforeEach(async ({ page }) => {
         SharedController = new sharedController(page);
-        await SharedController.accessUrl('https://easycash.id');
+        await SharedController.accessUrl('https://commitquality.com/practice-api');
     })
 
     test('Check Accessibility Entire Page', async ({ page }, testInfo) => {
@@ -21,17 +21,22 @@ test.describe('Accessibility Test', () => {
         await SharedController.accessibilityCheckByStatus(results, AccessibilityImpact.serious, 2);
     })
 
-    test('Check Accessibility on Element', async ({ page }) => {
+    test.only('Check Accessibility on Element', async ({ page }, testInfo) => {
         const results = await new AxeBuilder({ page })
-        .include('.back-link')
+        // .include('.back-link')
         .analyze();
+
+        await testInfo.attach('accessibility report', {
+            body: JSON.stringify(results, null, 2),
+            contentType: 'application/json',
+        })
 
         expect(results.violations).toEqual([]);
     })
 
     test('Check Accessibility exclude Element', async ({ page }) => {
         const results = await new AxeBuilder({ page })
-        .exclude('.back-link')
+        .exclude('a.back-link')
         .analyze();
 
         expect(results.violations).toEqual([]);

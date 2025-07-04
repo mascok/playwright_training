@@ -38,8 +38,8 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    // ['allure-playwright', { outputFolder: 'allure-results' }],
-    // ['json', { outputFile: 'playwright-report/playwright-report.json' }]
+    ['allure-playwright', { outputFolder: 'allure-results' }],
+    ['json', { outputFile: 'playwright-report/playwright-report.json' }]
   ],
   maxFailures: 0,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -73,6 +73,7 @@ export default defineConfig({
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
+    //   // testDir: './tests/spec/mobile',
     //   use: { ...devices['Pixel 5'] },
     // },
     // {
